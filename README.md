@@ -1,4 +1,3 @@
-# enjoy-learning
 This is a root repository for the mentorship
 
 ### My Plan
