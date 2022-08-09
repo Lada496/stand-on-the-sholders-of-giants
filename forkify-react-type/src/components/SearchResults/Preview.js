@@ -1,11 +1,11 @@
 import classes from "./Preview.module.css";
 import icons from "../../img/icons.svg";
-import { useSelector, useDispatch } from "react-redux";
-import { updateId } from "../../store/id-slice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { updateId, selectId } from "../../store/id-slice";
 
 const Preview = (props) => {
-  const dispatch = useDispatch();
-  const id = useSelector((state) => state.id.id);
+  const dispatch = useAppDispatch();
+  const id = useAppSelector(selectId);
   const updateIdHandler = () => {
     dispatch(updateId(props.result.id));
   };

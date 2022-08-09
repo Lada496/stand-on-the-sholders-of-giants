@@ -1,6 +1,11 @@
 import { useState, useEffect, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateRecipe } from "../../store/state-slice";
+import { selectId } from "../../store/id-slice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  updateRecipe,
+  selectRecipe,
+  selectBookmarks,
+} from "../../store/state-slice";
 import Figure from "./Figure";
 import RecipeDetails from "./RecipeDetails";
 import RecipeIngredients from "./RecipeIngredients/RecipeIngredients";
@@ -14,19 +19,21 @@ import Spinner from "../UI/Spinner";
 const Recipe = () => {
   const errorMessage = "We could not find that recipe. Please try another one!";
   const message = "Start by searching for a recipe or an ingredient. Have fun!";
-  const dispatch = useDispatch();
-  const id = useSelector((state) => state.id.id);
-  const recipe = useSelector((state) => state.state.recipe);
-  const bookmarks = useSelector((state) => state.state.bookmarks);
+  const dispatch = useAppDispatch();
+  const id = useAppSelector(selectId);
+  const recipe = useAppSelector(selectRecipe);
+  const bookmarks = useAppSelector(selectBookmarks);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loadRecipe = async () => {
-      if (id === null) {
+      setIsLoading(true);
+      if (id.length === 0) {
+        setIsLoading(false);
         return;
       }
-      setIsLoading(true);
+
       const response = await fetch(
         `${process.env.REACT_APP_RECIPE_API}get?rId=${id}`
       );

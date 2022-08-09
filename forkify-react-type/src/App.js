@@ -1,14 +1,14 @@
 import { Fragment } from "react";
-import { useDispatch } from "react-redux";
 import Header from "./components/Header/Header";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Recipe from "./components/Recipe/Recipe";
+import { useAppDispatch } from "./store/hooks";
 import { addBookmarks } from "./store/state-slice";
 
 import classes from "./App.module.css";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const loadBookmarks = async () => {
     const response = await fetch(`${process.env.REACT_APP_BOOKMARK_API}.json`);
     if (!response.ok) {

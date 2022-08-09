@@ -1,9 +1,10 @@
 import { Fragment, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   toggleBookmark,
   addBookmarks,
   deleteBookmarks,
+  selectBookmarks,
 } from "../../store/state-slice";
 import classes from "./RecipeDetails.module.css";
 import icons from "../../img/icons.svg";
@@ -11,8 +12,8 @@ import DeleteRecipe from "./DeleteRecipe";
 
 const RecipeDetails = (props) => {
   const [deleteRecipe, setDeleteRecipe] = useState(false);
-  const dispatch = useDispatch();
-  const bookmarks = useSelector((state) => state.state.bookmarks);
+  const dispatch = useAppDispatch();
+  const bookmarks = useAppSelector(selectBookmarks);
   const postNewBookmark = async (bookmark) => {
     const response = await fetch(`${process.env.REACT_APP_BOOKMARK_API}.json`, {
       method: "POST",
@@ -28,7 +29,6 @@ const RecipeDetails = (props) => {
         headers: { "Content-Type": "application/json" },
       }
     );
-    console.log(response);
   };
   const toggleBookmarksHandler = async () => {
     dispatch(toggleBookmark());

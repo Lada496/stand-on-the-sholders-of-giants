@@ -1,6 +1,6 @@
 import { useState, Fragment } from "react";
-import { useDispatch } from "react-redux";
 import icons from "../../../img/icons.svg";
+import { useAppDispatch } from "../../../store/hooks";
 import { addBookmarks } from "../../../store/state-slice";
 import Message from "../../UI/Message";
 import Spinner from "../../UI/Spinner";
@@ -34,7 +34,7 @@ const AddRecipeForm = (props) => {
     ingredient6,
   ]);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const sentMessage = (
     <div className={classes["add-recipe-window"]}>

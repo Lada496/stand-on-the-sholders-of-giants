@@ -2,23 +2,27 @@ import { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import Preview from "./Preview";
 import Copyright from "./Copyright";
-import { useSelector, useDispatch } from "react-redux";
-import { updateSearchResults } from "../../store/state-slice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import {
+  updateSearchResults,
+  selectQuery,
+  selectResults,
+  selectPage,
+  selectResultsPerPage,
+} from "../../store/state-slice";
 
 import classes from "./SearchResults.module.css";
 import ErrorMessage from "../UI/ErrorMessage";
 import Spinner from "../UI/Spinner";
 const SearchResults = () => {
-  const query = useSelector((state) => state.state.search.query);
-  const results = useSelector((state) => state.state.search.results);
-  const page = useSelector((state) => state.state.search.page);
+  const query = useAppSelector(selectQuery);
+  const results = useAppSelector(selectResults);
+  const page = useAppSelector(selectPage);
   const errorMessage = "No recipes found for your query! . Please try again;";
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const resultsPerPage = useSelector(
-    (state) => state.state.search.resultsPerPage
-  );
-  const dispatch = useDispatch();
+  const resultsPerPage = useAppSelector(selectResultsPerPage);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const sendSearchHandler = async () => {

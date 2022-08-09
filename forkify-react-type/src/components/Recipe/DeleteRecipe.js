@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
+import { selectState } from "../../store/state-slice";
 import ReactDOM from "react-dom";
 import classes from "./DeleteRecipe.module.css";
 import icons from "../../img/icons.svg";
@@ -9,7 +10,7 @@ const Backdrop = (props) => {
 };
 
 const DeleteRecipeConfirm = (props) => {
-  const state = useSelector((state) => state.state);
+  const state = useSelector(selectState);
   const deleteBookmark = async (bookmark) => {
     const response = await fetch(
       `${process.env.REACT_APP_BOOKMARK_API}/${bookmark.apiKey}.json`,

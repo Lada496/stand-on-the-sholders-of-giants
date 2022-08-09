@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
+import { selectBookmarks } from "../../../store/state-slice";
 
 import Preview from "../../SearchResults/Preview";
 import ErrorMessage from "../../UI/ErrorMessage";
@@ -9,7 +10,7 @@ import icons from "../../../img/icons.svg";
 
 const Bookmarks = () => {
   const errorMessage = "No bookmark yet. Find a nice recipe and bookmark it :)";
-  const bookmarks = useSelector((state) => state.state.bookmarks);
+  const bookmarks = useSelector(selectBookmarks);
   const preview = bookmarks.map((result) => {
     return <Preview result={result} key={result.id} />;
   });

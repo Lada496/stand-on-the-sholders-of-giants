@@ -1,14 +1,15 @@
 import { useRef } from "react";
 import { updateSearchQuery } from "../../../store/state-slice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../../store/hooks";
 import SearchButton from "./SearchButton";
 
 import classes from "./Form.module.css";
 
 const Form = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const inputRef = useRef();
-  const updateSearchQueryHandler = () => {
+  const updateSearchQueryHandler = (e) => {
+    e.preventDefault();
     dispatch(updateSearchQuery(inputRef.current.value));
   };
 

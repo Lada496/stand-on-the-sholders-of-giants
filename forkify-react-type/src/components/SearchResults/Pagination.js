@@ -1,15 +1,16 @@
 import { Fragment } from "react";
 import classes from "./Pagination.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   increaseSearchPage,
   decreaseSearchPage,
+  selectState,
 } from "../../store/state-slice";
 import icons from "../../img/icons.svg";
 
 const Pagination = () => {
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state.state);
+  const dispatch = useAppDispatch();
+  const state = useAppSelector(selectState);
   const curPage = state.search.page;
   const numPage = Math.ceil(
     state.search.results.length / state.search.resultsPerPage
