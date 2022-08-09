@@ -1,0 +1,122 @@
+.recipe__details {
+    display: flex;
+    align-items: center;
+    padding: 7.5rem 8rem 3.5rem 8rem;
+  }
+
+  .recipe__info {
+    font-size: 1.65rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    
+  }
+  .recipe__info:not(:last-child) {
+    margin-right: 4.5rem;
+  }
+
+  .recipe__info-icon {
+    height: 2.35rem;
+    width: 2.35rem;
+    fill: var(--color-primary);
+    margin-right: 1.15rem;
+  }
+
+  .recipe__info-data {
+    margin-right: 0.5rem;
+    font-weight: 700;
+  }
+
+  .recipe__info-buttons {
+    display: flex;
+    margin-left: 1.6rem;
+    transform: translateY(-1px);
+  }
+
+  .recipe__user-generated {
+    background-color: darken(var(--color-grey-light-2), 2%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 10rem;
+
+    margin-left: auto;
+    margin-right: 1.75rem;  
+  }
+
+  .recipe__user-generated svg {
+    height: 2.25rem;
+    width: 2.25rem;
+    fill: var(--color-primary);
+  }
+
+  .btn--round {
+    background-image: var(--gradient);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    height: 4.5rem;
+    width: 4.5rem;
+    /* margin-left: auto; */
+    transition: all 0.2s;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } 
+  .btn--round:hover {
+      transform: scale(1.07);
+    }
+  
+    .btn--round:focus {
+      outline: none;
+    }
+  
+    .btn--round svg {
+      height: 2.5rem;
+      width: 2.5rem;
+      fill: #fff;
+    }
+
+  
+  .btn--tiny {
+    height: 2rem;
+    width: 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .btn--tiny:focus {
+    outline: none;
+  }
+  
+  .btn--tiny svg {
+    height: 100%;
+    width: 100%;
+    fill: var(--color-primary);
+    transition: all 0.3s;
+  }
+
+  .btn--tiny:hover svg {
+      fill: var(--color-grad-2);
+      transform: translateY(-1px);
+    }
+  
+    .btn--tiny:active svg {
+      fill: var(--color-grad-2);
+      transform: translateY(0);
+    }
+  
+    .btn--tiny:not(:last-child) {
+      margin-right: 0.3rem;
+    }
+
+    .hidden > :first-child{
+        display: none;
+    }
+
+  
+  
