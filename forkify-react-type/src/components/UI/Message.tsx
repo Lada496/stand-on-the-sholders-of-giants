@@ -1,6 +1,11 @@
 import classes from "./ErrorMessage.module.css";
 import icons from "../../img/icons.svg";
-const Message = (props) => {
+
+type MessageProps = {
+  message: string;
+};
+
+const Message = ({ message }: MessageProps) => {
   return (
     <div className={classes.message}>
       <div>
@@ -8,7 +13,7 @@ const Message = (props) => {
           <use href={`${icons}#icon-smile`}></use>
         </svg>
       </div>
-      <p>{props.message}</p>
+      <p>{message}</p>
     </div>
   );
 };

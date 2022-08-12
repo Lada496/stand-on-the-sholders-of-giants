@@ -1,7 +1,11 @@
 import classes from "./ErrorMessage.module.css";
 import icons from "../../img/icons.svg";
 
-const ErrorMessage = (props) => {
+type ErrorMessageProps = {
+  message: string;
+};
+
+const ErrorMessage = ({ message }: ErrorMessageProps) => {
   return (
     <div className={classes.error}>
       <div>
@@ -9,7 +13,7 @@ const ErrorMessage = (props) => {
           <use href={`${icons}#icon-alert-triangle`}></use>
         </svg>
       </div>
-      <p>{props.message}</p>
+      <p>{message}</p>
     </div>
   );
 };

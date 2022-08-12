@@ -1,13 +1,34 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, SyntheticEvent } from "react";
 import icons from "../../../img/icons.svg";
 import { useAppDispatch } from "../../../store/hooks";
+import { IBookmark } from "../../../store/state-slice";
 import { addBookmarks } from "../../../store/state-slice";
 import Message from "../../UI/Message";
 import Spinner from "../../UI/Spinner";
 import ErrorMessage from "../../UI/ErrorMessage";
 import classes from "./AddRecipeForm.module.css";
 
-const AddRecipeForm = (props) => {
+type AddRecipeFormProps = {
+  onConfirm: () => void;
+};
+
+type Ingredient = {
+  quantity: number | null;
+  unit: string;
+  description: string;
+};
+
+type Recipe = {
+  title: string;
+  source_url: string;
+  image_url: string;
+  publisher: string;
+  cooking_time: number;
+  servings: number;
+  ingredients: Ingredient[];
+};
+
+const AddRecipeForm = ({ onConfirm }: AddRecipeFormProps) => {
   const message = "Recipe was successfully uploaded :)";
   const errorM = "Sending recipe faild... try again!";
   const [sendingRecipe, setSendingRecipe] = useState(false);
@@ -22,9 +43,9 @@ const AddRecipeForm = (props) => {
   const [ingredient1, setIngredient1] = useState("0.5,kg,Rice");
   const [ingredient2, setIngredient2] = useState("1,,Avocado");
   const [ingredient3, setIngredient3] = useState(",,salt");
-  const [ingredient4, setIngredient4] = useState(null);
-  const [ingredient5, setIngredient5] = useState(null);
-  const [ingredient6, setIngredient6] = useState(null);
+  const [ingredient4, setIngredient4] = useState("");
+  const [ingredient5, setIngredient5] = useState("");
+  const [ingredient6, setIngredient6] = useState("");
   const [ingredients, setIngredients] = useState([
     ingredient1,
     ingredient2,
@@ -54,7 +75,9 @@ const AddRecipeForm = (props) => {
     </div>
   );
 
-  const timeout = function (s) {
+  type TimeoutPromiss = Promise<Error>;
+
+  const timeout = function (s: number): Promise<TimeoutPromiss> {
     return new Promise(function (_, reject) {
       setTimeout(function () {
         reject(new Error(`Request took too long! Timeout after ${s} second`));
@@ -62,7 +85,9 @@ const AddRecipeForm = (props) => {
     });
   };
 
-  const uploadRecipe = async (recipe) => {
+  type FetchPromise = Promise<any>;
+
+  const uploadRecipe = async (recipe: Recipe) => {
     const fetchData = fetch(`${process.env.REACT_APP_RECIPE_API}`, {
       method: "POST",
       headers: {
@@ -70,7 +95,7 @@ const AddRecipeForm = (props) => {
       },
       body: JSON.stringify(recipe),
     });
-    const response = await Promise.race([
+    const response = await Promise.race<TimeoutPromiss | FetchPromise>([
       fetchData,
       timeout(process.env.REACT_APP_TIMEOUT_SEC),
     ]);
@@ -90,7 +115,7 @@ const AddRecipeForm = (props) => {
     postNewBookmark(bookmark);
   };
 
-  const postNewBookmark = async (bookmark) => {
+  const postNewBookmark = async (bookmark: IBookmark) => {
     const response = await fetch(`${process.env.REACT_APP_BOOKMARK_API}.json`, {
       method: "POST",
       body: JSON.stringify(bookmark),
@@ -99,12 +124,12 @@ const AddRecipeForm = (props) => {
   };
 
   const closeOperation = () => {
-    setTimeout(props.onConfirm(), 5000);
+    setTimeout(onConfirm, 5000);
     // setSentRecipe(false);
   };
 
-  const addRecipeHandler = async (event) => {
-    event.preventDefault();
+  const addRecipeHandler = async (e: SyntheticEvent) => {
+    e.preventDefault();
     setSendingRecipe(true);
     let newIngredients = [];
     for (const key in ingredients) {
@@ -123,8 +148,8 @@ const AddRecipeForm = (props) => {
         });
       }
     }
-    console.log(newIngredients);
-    const recipe = {
+
+    const recipe: Recipe = {
       title: title,
       source_url: url,
       image_url: image,
@@ -133,7 +158,7 @@ const AddRecipeForm = (props) => {
       servings: +servings,
       ingredients: newIngredients,
     };
-    console.log(recipe);
+
     try {
       await uploadRecipe(recipe);
       setSendingRecipe(false);
@@ -147,7 +172,7 @@ const AddRecipeForm = (props) => {
   };
   const recipeForm = (
     <div className={classes["add-recipe-window"]}>
-      <button onClick={props.onConfirm} className={classes["btn--close-modal"]}>
+      <button onClick={onConfirm} className={classes["btn--close-modal"]}>
         &times;
       </button>
       <form onSubmit={addRecipeHandler} className={classes.upload}>

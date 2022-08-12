@@ -5,23 +5,35 @@ import {
   addBookmarks,
   deleteBookmarks,
   selectBookmarks,
+  IDetailedRecipe,
+  IBookmark,
+  IRecipe,
 } from "../../store/state-slice";
 import classes from "./RecipeDetails.module.css";
 import icons from "../../img/icons.svg";
 import DeleteRecipe from "./DeleteRecipe";
 
-const RecipeDetails = (props) => {
+type RecipeDetailsProps = {
+  recipe: IDetailedRecipe;
+};
+
+const RecipeDetails = ({ recipe }: RecipeDetailsProps) => {
   const [deleteRecipe, setDeleteRecipe] = useState(false);
   const dispatch = useAppDispatch();
   const bookmarks = useAppSelector(selectBookmarks);
-  const postNewBookmark = async (bookmark) => {
+  const postNewBookmark = async (bookmark: IRecipe): Promise<string> => {
     const response = await fetch(`${process.env.REACT_APP_BOOKMARK_API}.json`, {
       method: "POST",
       body: JSON.stringify(bookmark),
       headers: { "Content-Type": "application/json" },
     });
+    if (!response.ok) {
+      throw Error("failed to add this recipe to bookmark");
+    }
+    const { name } = await response.json();
+    return name;
   };
-  const deleteBookmark = async (bookmark) => {
+  const deleteBookmark = async (bookmark: IBookmark) => {
     const response = await fetch(
       `${process.env.REACT_APP_BOOKMARK_API}/${bookmark.apiKey}.json`,
       {
@@ -32,22 +44,27 @@ const RecipeDetails = (props) => {
   };
   const toggleBookmarksHandler = async () => {
     dispatch(toggleBookmark());
-    // false -> true
-    if (props.recipe.bookmarked === false) {
-      const bookmark = {
-        publisher: props.recipe.publisher,
-        image: props.recipe.image,
-        title: props.recipe.title,
-        id: props.recipe.id,
-        ...(props.recipe.key && { key: props.recipe.key }),
+    //false -> true
+    if (recipe.bookmarked === false) {
+      const bookmarkToPost = {
+        publisher: recipe.publisher,
+        image: recipe.image,
+        title: recipe.title,
+        id: recipe.id,
+        ...(recipe.key && { key: recipe.key }),
+      };
+
+      const name = await postNewBookmark(bookmarkToPost);
+      const bookmark: IBookmark = {
+        ...bookmarkToPost,
+        apiKey: name,
       };
       dispatch(addBookmarks(bookmark));
-      await postNewBookmark(bookmark);
       // true->false
     } else {
       for (const key in bookmarks) {
-        if (bookmarks[key].id === props.recipe.id) {
-          dispatch(deleteBookmarks(key));
+        if (bookmarks[key].id === recipe.id) {
+          dispatch(deleteBookmarks(+key));
           await deleteBookmark(bookmarks[key]);
         }
       }
@@ -80,7 +97,7 @@ const RecipeDetails = (props) => {
           <span
             className={`${classes["recipe__info-data"]} ${classes["recipe__info-data--minutes"]}`}
           >
-            {props.recipe.cookingTime}
+            {recipe.cookingTime}
           </span>
           <span className={classes["recipe__info-text"]}>minutes</span>
         </div>
@@ -91,7 +108,7 @@ const RecipeDetails = (props) => {
           <span
             className={`${classes["recipe__info-data"]} ${classes["recipe__info-data--people"]}`}
           >
-            {props.recipe.servings}
+            {recipe.servings}
           </span>
           <span className={classes["recipe__info-text"]}>servings</span>
 
@@ -116,7 +133,7 @@ const RecipeDetails = (props) => {
         </div>
         <div
           className={`${classes["recipe__user-generated"]} ${
-            props.recipe.key === null ? classes.hidden : ""
+            recipe.key === null ? classes.hidden : ""
           }`}
         >
           <svg onClick={showDeleteRecipeHandler}>
@@ -128,11 +145,9 @@ const RecipeDetails = (props) => {
           onClick={toggleBookmarksHandler}
           className={`${classes["btn--round"]} ${classes["btn--bookmark"]}`}
         >
-          <svg class="">
+          <svg className="">
             <use
-              href={`${icons}#icon-bookmark${
-                props.recipe.bookmarked ? "-fill" : ""
-              }`}
+              href={`${icons}#icon-bookmark${recipe.bookmarked ? "-fill" : ""}`}
             ></use>
           </svg>
         </button>

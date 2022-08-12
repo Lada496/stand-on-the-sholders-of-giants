@@ -1,19 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RES_PER_PAGE } from "../config";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./index";
 
-interface IRecipe {
+export interface IRecipe {
   id: string;
   title: string;
   publisher: string;
-  sourceUrl: string;
   image: string;
+  key?: string;
+}
+
+export interface IDetailedRecipe extends IRecipe {
+  sourceUrl: string;
   servings: string;
   cookingTime: string;
   ingredients: string[];
   bookmarked: boolean;
-  key?: string;
+}
+
+export interface IBookmark extends IRecipe {
+  apiKey: string;
 }
 
 interface ISearch {
@@ -24,12 +30,12 @@ interface ISearch {
 }
 
 interface IState {
-  recipe: IRecipe;
+  recipe: IDetailedRecipe;
   search: ISearch;
-  bookmarks: IRecipe[];
+  bookmarks: IBookmark[];
 }
 
-const initialRecipe: IRecipe = {
+const initialRecipe: IDetailedRecipe = {
   id: "",
   title: "",
   publisher: "",
@@ -46,7 +52,7 @@ const initialSearch: ISearch = {
   query: "",
   results: [],
   page: 1,
-  resultsPerPage: RES_PER_PAGE,
+  resultsPerPage: process.env.REACT_APP_RES_PER_PAGE,
 };
 
 const initialState: IState = {
@@ -59,7 +65,7 @@ const stateSlice = createSlice({
   name: "state",
   initialState,
   reducers: {
-    updateRecipe(state, action: PayloadAction<IRecipe>) {
+    updateRecipe(state, action: PayloadAction<IDetailedRecipe>) {
       state.recipe.id = action.payload.id;
       state.recipe.title = action.payload.title;
       state.recipe.publisher = action.payload.publisher;
@@ -80,7 +86,7 @@ const stateSlice = createSlice({
       state.search.query = action.payload;
     },
 
-    updateSearchResults(state, action: PayloadAction<IRecipe[]>) {
+    updateSearchResults(state, action: PayloadAction<IDetailedRecipe[]>) {
       state.search.results.splice(0, state.search.results.length);
       for (const result of action.payload) {
         state.search.results.push(result);
@@ -92,7 +98,7 @@ const stateSlice = createSlice({
     decreaseSearchPage(state) {
       state.search.page--;
     },
-    addBookmarks(state, action: PayloadAction<IRecipe>) {
+    addBookmarks(state, action: PayloadAction<IBookmark>) {
       state.bookmarks.push(action.payload);
     },
     deleteBookmarks(state, action: PayloadAction<number>) {

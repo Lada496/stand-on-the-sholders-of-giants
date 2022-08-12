@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Recipe from "./components/Recipe/Recipe";
 import { useAppDispatch } from "./store/hooks";
-import { addBookmarks } from "./store/state-slice";
+import { addBookmarks, IBookmark } from "./store/state-slice";
 
 import classes from "./App.module.css";
 
@@ -15,7 +15,7 @@ function App() {
       throw new Error("Failed fetch bookmarks");
     }
     const data = await response.json();
-    let results = [];
+    let results: IBookmark[] = [];
     for (const key in data) {
       results.push({
         apiKey: key,
@@ -26,9 +26,9 @@ function App() {
         ...(data[key].key && { key: data[key].key }),
       });
     }
-    results.map((result) => {
+    for (const result of results) {
       dispatch(addBookmarks(result));
-    });
+    }
   };
   loadBookmarks();
   return (

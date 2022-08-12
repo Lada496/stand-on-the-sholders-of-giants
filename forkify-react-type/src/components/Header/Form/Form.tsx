@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, SyntheticEvent } from "react";
 import { updateSearchQuery } from "../../../store/state-slice";
 import { useAppDispatch } from "../../../store/hooks";
 import SearchButton from "./SearchButton";
@@ -7,10 +7,12 @@ import classes from "./Form.module.css";
 
 const Form = () => {
   const dispatch = useAppDispatch();
-  const inputRef = useRef();
-  const updateSearchQueryHandler = (e) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const updateSearchQueryHandler = (e: SyntheticEvent): void => {
     e.preventDefault();
-    dispatch(updateSearchQuery(inputRef.current.value));
+    if (inputRef.current) {
+      dispatch(updateSearchQuery(inputRef.current.value));
+    }
   };
 
   return (
