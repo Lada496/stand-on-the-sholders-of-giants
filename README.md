@@ -26,7 +26,7 @@ This is a root repository for the mentorship
 <span>18: Serverless Functions + Stripe</span></br>
 <del>19: Typescript Basics: Typing Monsters-Rolodex</del></br>
 <del>20: Typescript Advanced: Typing Redux + Crwn-Clothing</del></br>
-<span>21: Typescript Advanced: Typing Firebase + User Redux Files</span></br>
+<del>21: Typescript Advanced: Typing Firebase + User Redux Files</del></br>
 <span>22: Typescript Advanced: Redux Store + Middleware</span></br>
 <span>23: Typescript Advanced: Redux-Saga (⚠️ didn't fully understand)</span></br>
 <span>24: Typescript Advanced: Typing Our Crwn-Clothing Components</span></br>
