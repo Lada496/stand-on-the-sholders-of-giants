@@ -7,11 +7,11 @@ import {
   fetchCategoriesFailure,
 } from "./category.action";
 
-export type CategoiresState = {
-  readonly categories: Category[];
-  readonly isLoading: boolean;
-  readonly error: Error | null;
-};
+export type CategoiresState = Readonly<{
+  categories: Category[];
+  isLoading: boolean;
+  error: Error | null;
+}>;
 
 export const CATEGORIES_INITIAL_STATE: CategoiresState = {
   categories: [],
