@@ -1,0 +1,56 @@
+.pagination {
+  margin-top: auto;
+  padding: 0 3.5rem;
+}
+
+.btn--inline {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: none;
+  background-color: var(--color-grey-light-1);
+  padding: 0.8rem 1.2rem;
+  border-radius: 10rem;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+.btn--inline svg {
+  height: 1.6rem;
+  width: 1.6rem;
+  fill: currentColor;
+  margin: 0 0.2rem;
+}
+
+.btn--inline span {
+  margin: 0 0.4rem;
+}
+
+.btn--inline:hover {
+  color: var(--color-grad-2);
+  background-color: var(--color-grey-light-2);
+}
+
+.btn--inline:focus {
+  outline: none;
+}
+
+.pagination {
+  margin-top: auto;
+  padding: 0 3.5rem;
+}
+
+.pagination::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.pagination__btn--prev {
+  float: left;
+}
+.pagination__btn--next {
+  float: right;
+}

@@ -1,0 +1,17 @@
+.recipe__ingredient {
+    display: flex;
+  }
+
+  .recipe__icon {
+    height: 2rem;
+    width: 2rem;
+    fill: var(--color-primary);
+    margin-right: 1.1rem;
+    flex: 0 0 auto;
+    margin-top: 0.1rem;
+  }
+
+  .recipe__quantity {
+    margin-right: 0.5rem;
+    flex: 0 0 auto;
+  }
