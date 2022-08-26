@@ -8,11 +8,11 @@ import {
   signOutFailed,
 } from "./user.action";
 
-export type UserState = {
-  readonly currentUser: UserData | null;
-  readonly isLoading: boolean;
-  readonly error: Error | null;
-};
+export type UserState = Readonly<{
+  currentUser: UserData | null;
+  isLoading: boolean;
+  error: Error | null;
+}>;
 const INITIAL_STATE: UserState = {
   currentUser: null,
   isLoading: false,
