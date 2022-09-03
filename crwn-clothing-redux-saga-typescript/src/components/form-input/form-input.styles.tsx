@@ -9,7 +9,12 @@ const shrinkLabelStyles = css`
   color: ${mainColor};
 `;
 
-export const FormInputLabel = styled.label`
+type FormInputLabelProps = {
+  shrink?: boolean;
+};
+
+// Great things about styled-components is that you can just pass it as generic to styled.label because by default they take some generic value and then add as the actual props value
+export const FormInputLabel = styled.label<FormInputLabelProps>`
   color: ${subColor};
   font-size: 16px;
   font-weight: normal;
