@@ -9,11 +9,21 @@ import {
 } from "../../store/categories/category.selector";
 import "./category.styles.scss";
 
+type CategoryRouteParams = {
+  category: string;
+};
+
 const Category = () => {
-  const { category } = useParams();
+  // these are ONLY keys of category route params
+  // the reason why we do like this is becuase if there are additional params we wanna be able to have them accesible
+  // also this must be string no loger being unknown
+
+  const { category } = useParams<
+    keyof CategoryRouteParams
+  >() as CategoryRouteParams;
   const categoryMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(categoryMap[category]);
 
   useEffect(() => {
     setProducts(categoryMap[category]);
