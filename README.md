@@ -27,9 +27,9 @@ This is a root repository for the mentorship
 <del>19: Typescript Basics: Typing Monsters-Rolodex</del></br>
 <del>20: Typescript Advanced: Typing Redux + Crwn-Clothing</del></br>
 <del>21: Typescript Advanced: Typing Firebase + User Redux Files</del></br>
-<span>22: Typescript Advanced: Redux Store + Middleware</span></br>
-<span>23: Typescript Advanced: Redux-Saga (⚠️ didn't fully understand)</span></br>
-<span>24: Typescript Advanced: Typing Our Crwn-Clothing Components</span></br>
+<del>22: Typescript Advanced: Redux Store + Middleware</del></br>
+<del>23: Typescript Advanced: Redux-Saga (⚠️ didn't fully understand)</del></br>
+<del>24: Typescript Advanced: Typing Our Crwn-Clothing Components</del></br>
 <del>25: GraphQL + Apollo Client</del></br>
 <span>26: Performance Optimizations</span></br>
 <span>27: Firebase Rule Security</span></br>
