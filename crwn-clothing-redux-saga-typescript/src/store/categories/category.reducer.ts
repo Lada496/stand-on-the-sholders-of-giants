@@ -7,13 +7,13 @@ import {
   fetchCategoriesFailure,
 } from "./category.action";
 
-export type CategoiresState = Readonly<{
+export type CategoriesState = Readonly<{
   categories: Category[];
   isLoading: boolean;
   error: Error | null;
 }>;
 
-export const CATEGORIES_INITIAL_STATE: CategoiresState = {
+export const CATEGORIES_INITIAL_STATE: CategoriesState = {
   categories: [],
   isLoading: false,
   error: null,
@@ -22,7 +22,7 @@ export const CATEGORIES_INITIAL_STATE: CategoiresState = {
 export const categoriesReducer = (
   state = CATEGORIES_INITIAL_STATE,
   action = {} as AnyAction
-): CategoiresState => {
+): CategoriesState => {
   if (fetchCategoriesStart.match(action)) {
     return { ...state, isLoading: true };
   }

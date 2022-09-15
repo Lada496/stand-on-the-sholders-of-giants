@@ -1,23 +1,23 @@
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
-import {
-  googleSignInStart,
-  emailSignInStart,
-} from "../../store/user/user.action";
+import { signUpStart, googleSignInStart } from "../../store/user/user.action";
 
-import "./sign-in-form.styles.scss";
+import { SignInContainer, ButtonsContainer } from "./sign-up-form.styles";
 
 const defaultFormField = {
+  displayName: "",
   email: "",
   password: "",
+  confirmPassword: "",
 };
-const SignInForm = () => {
-  const dispatch = useDispatch();
+const SignUpForm = () => {
   const [formField, setFormField] = useState(defaultFormField);
-  const { email, password } = formField;
+  const { displayName, email, password, confirmPassword } = formField;
+  const dispatch = useDispatch();
 
   const resetFormFields = () => {
     setFormField(defaultFormField);
@@ -27,33 +27,32 @@ const SignInForm = () => {
     dispatch(googleSignInStart());
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (password !== confirmPassword) {
+      alert("password do not match");
+      return;
+    }
     try {
-      dispatch(emailSignInStart(email, password));
+      dispatch(signUpStart(email, password, displayName));
       resetFormFields();
     } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("incorrect password for email");
-          break;
-        case "auth/user-not-found":
-          alert("no user assiciated with this email");
-          break;
-        default:
-          console.log(error);
+      if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
+        alert("Cannot create user, email already in use");
+      } else {
+        console.error("user creation uncountered an error", error);
       }
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormField({ ...formField, [name]: value });
   };
 
   return (
-    <div className="sign-up-container">
+    <SignInContainer>
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -65,6 +64,7 @@ const SignInForm = () => {
           name="email"
           value={email}
         />
+
         <FormInput
           label="Password"
           type="password"
@@ -73,19 +73,19 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
-        <div className="buttons-container">
+        <ButtonsContainer>
           <Button type="submit">Sign In</Button>
           <Button
+            buttonType={BUTTON_TYPE_CLASSES.google}
             type="button"
             onClick={signInWithGoogle}
-            buttonType={BUTTON_TYPE_CLASSES.google}
           >
-            Google sign In
+            Sign In With Google
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
-export default SignInForm;
+export default SignUpForm;
