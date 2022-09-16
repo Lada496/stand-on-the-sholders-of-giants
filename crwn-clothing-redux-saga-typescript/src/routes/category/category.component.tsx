@@ -7,7 +7,8 @@ import {
   selectCategoriesIsLoading,
   selectCategoriesMap,
 } from "../../store/categories/category.selector";
-import "./category.styles.scss";
+
+import { CategoryContainer, Title } from "./category.styles";
 
 type CategoryRouteParams = {
   category: string;
@@ -30,16 +31,16 @@ const Category = () => {
   }, [category, categoryMap]);
   return (
     <Fragment>
-      <h2 className="category-title">{category}</h2>
+      <Title>{category}</Title>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="category-container">
+        <CategoryContainer>
           {products &&
             products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-        </div>
+        </CategoryContainer>
       )}
     </Fragment>
   );
