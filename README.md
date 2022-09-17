@@ -31,9 +31,9 @@ This is a root repository for the mentorship
 <del>23: Typescript Advanced: Redux-Saga (⚠️ didn't fully understand)</del></br>
 <del>24: Typescript Advanced: Typing Our Crwn-Clothing Components</del></br>
 <del>25: GraphQL + Apollo Client</del></br>
-<span>26: Performance Optimizations</span></br>
-<span>27: Firebase Rule Security</span></br>
-<span>28: Master Project: Mobile Support</span></br>
+<del>26: Performance Optimizations</del></br>
+<del>27: Firebase Rule Security</del></br>
+<del>28: Master Project: Mobile Support</del></br>
 <span>29: React Interview Questions + Advice</span></br>
 <span>30: Progressive Web App</span></br>
 <span>31: Testing in React</span></br>
