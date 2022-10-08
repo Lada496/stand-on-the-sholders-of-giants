@@ -1,0 +1,20 @@
+{
+  "name": "stand-on-the-sholders-of-giants",
+  "version": "1.0.0",
+  "description": "This is a root repository for the mentorship",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lada496/enjoy-learning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lada496/enjoy-learning/issues"
+  },
+  "homepage": "https://github.com/Lada496/enjoy-learning#readme"
+}
