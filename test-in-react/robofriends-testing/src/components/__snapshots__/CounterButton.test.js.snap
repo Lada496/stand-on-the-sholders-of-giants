@@ -1,17 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`correnctly increments the counter 1`] = `
+exports[`expect to render CounterButton component 1`] = `
 <button
-  id="counter"
-  onClick={[Function]}
->
-  Count: 
-  0
-</button>
-`;
-
-exports[`renders without crashing 1`] = `
-<button
+  color="red"
   id="counter"
   onClick={[Function]}
 >
