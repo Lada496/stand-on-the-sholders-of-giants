@@ -34,14 +34,14 @@ This is a root repository for the mentorship
 <del>26: Performance Optimizations</del></br>
 <del>27: Firebase Rule Security</del></br>
 <del>28: Master Project: Mobile Support</del></br>
-<span>29: React Interview Questions + Advice</span></br>
-<span>30: Progressive Web App</span></br>
+<del>29: React Interview Questions + Advice</del></br>
+<del>30: Progressive Web App</del></br>
 <span>31: Testing in React</span></br>
-<span>32: Webpack + Babel</span></br>
-<span>33: Build a GatsbyJS Blog</span></br>
-<span>34: Appendix 1: Key Developer Concepts (Optional)</span></br>
-<span>35: Open Source Projects (Optional)</span></br>
-<span>36: AMA + Bonus (Optional)</span></br>
+<del>32: Webpack + Babel</del></br>
+<del>33: Build a GatsbyJS Blog</del></br>
+<del>34: Appendix 1: Key Developer Concepts (Optional)</del></br>
+<del>35: Open Source Projects (Optional)</del></br>
+<del>36: AMA + Bonus (Optional)</del></br>
 
 #### Review projects ideas
 
