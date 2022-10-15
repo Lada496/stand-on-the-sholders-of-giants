@@ -4,7 +4,8 @@
   "description": "This is a root repository for the mentorship",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "(cd ./test-in-react/test && npm test) && (cd ./test-in-react/robofriends-testing && npm test) ",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Lada496/enjoy-learning/issues"
   },
-  "homepage": "https://github.com/Lada496/enjoy-learning#readme"
+  "homepage": "https://github.com/Lada496/enjoy-learning#readme",
+  "devDependencies": {
+    "husky": "^8.0.0"
+  }
 }

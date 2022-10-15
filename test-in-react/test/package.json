@@ -4,8 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "jest",
-    "prepare": "cd ../.. && husky install ./test-in-react/test/.husky"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
