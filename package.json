@@ -4,7 +4,6 @@
   "description": "This is a root repository for the mentorship",
   "main": "index.js",
   "scripts": {
-    "test": "(cd ./test-in-react/test && npm test) && (cd ./test-in-react/robofriends-testing && npm test) ",
     "prepare": "husky install"
   },
   "repository": {
