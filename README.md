@@ -36,7 +36,7 @@ This is a root repository for the mentorship
 <del>28: Master Project: Mobile Support</del></br>
 <del>29: React Interview Questions + Advice</del></br>
 <del>30: Progressive Web App</del></br>
-<span>31: Testing in React</span></br>
+<del>31: Testing in React</del></br>
 <del>32: Webpack + Babel</del></br>
 <del>33: Build a GatsbyJS Blog</del></br>
 <del>34: Appendix 1: Key Developer Concepts (Optional)</del></br>
